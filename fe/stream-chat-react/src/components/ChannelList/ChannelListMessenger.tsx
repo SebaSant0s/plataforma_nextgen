@@ -53,7 +53,7 @@ export const ChannelListMessenger = <
     <div className='str-chat__channel-list-messenger str-chat__channel-list-messenger-react'>
       <div
         aria-label={t('aria/Channel list')}
-        className='str-chat__channel-list-messenger__main str-chat__channel-list-messenger-react__main'
+        className='-messenger__main -messenger-react__main'
         role='listbox'
       >
         {children}

@@ -74,10 +74,11 @@
 .chat-wrapper {
   display: flex;
   flex-direction: row;
+  height: 100%;
 }
 
 .str-chat {
-  height: 700px !important;
+  height: 100vh;
 }
 .str-chat-channel {
   flex-grow: 1;
@@ -105,6 +106,7 @@ body,
 body {
   margin: 0;
   display: flex;
+  overflow: hidden;
 }
 .str-chat__channel-list {
   width: 30%;
