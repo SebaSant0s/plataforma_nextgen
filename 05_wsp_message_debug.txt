@@ -1,0 +1,83 @@
+chat-backend     | 
+chat-backend     | > be@1.0.0 start
+chat-backend     | > node dist/index.js                                                                                                                                                                                           
+chat-backend     |                                                                                                                                                                                                                
+chat-backend     | 🚀 Server + WebSocket running at http://localhost:4000
+nextgen-chatapp  |   ▲ Next.js 14.2.4
+nextgen-chatapp  |   - Local:        http://localhost:3000
+nextgen-chatapp  |   - Network:      http://0.0.0.0:3000                                                                                                                                                                          
+nextgen-chatapp  |                                                                                                                                                                                                                
+nextgen-chatapp  |  ✓ Starting...                                                                                                                                                                                                 
+nextgen-chatapp  |  ✓ Ready in 92ms                                                                                                                                                                                               
+nextgen-chatapp  | Received request: POST application/json
+nextgen-chatapp  | Parsed body: {
+nextgen-chatapp  |   chat_name: 'D.Hevia',                                                                                                                                                                                        
+nextgen-chatapp  |   chat_member: '56974344043',                                                                                                                                                                                  
+nextgen-chatapp  |   message_id: 'wamid.HBgLNTY5NzQzNDQwNDMVAgASGCA5OEMzMkY1MjdBQkFGNDNCRTY0OEUyNTM0QkVEN0FFMwA=',                                                                                                                
+nextgen-chatapp  |   user_name: 'D.Hevia',                                                                                                                                                                                        
+nextgen-chatapp  |   user_phone_number: '56974344043',                                                                                                                                                                            
+nextgen-chatapp  |   message: 'pibes',
+nextgen-chatapp  |   timestamp: '1746742232',                                                                                                                                                                                     
+nextgen-chatapp  |   image_url: '',                                                                                                                                                                                               
+nextgen-chatapp  |   audio_url: ''                                                                                                                                                                                                
+nextgen-chatapp  | }                                                                                                                                                                                                              
+nextgen-chatapp  | Checking if users exist...
+chat-backend     | test_api_key                                                                                                                                                                                                   
+chat-backend     | eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZXJ2ZXIiOnRydWV9.KE-Y36HY7IpStFo-8E5ea4QmtAmcJ56C5_4upTR7vFA                                                                                                          
+nextgen-chatapp  | ✅ Users ensured in StreamChat: [
+nextgen-chatapp  |   { id: '56974344043', name: 'D.Hevia' },
+nextgen-chatapp  |   {                                                                                                                                                                                                            
+nextgen-chatapp  |     id: '5491140897287',                                                                                                                                                                                       
+nextgen-chatapp  |     name: 'NextGen AI',                                                                                                                                                                                        
+nextgen-chatapp  |     image: 'https://hugely-prime-seahorse.ngrok-free.app/profile/agent-profile.svg'
+nextgen-chatapp  |   },                                                                                                                                                                                                           
+nextgen-chatapp  |   { id: 'default-user', name: 'System' }                                                                                                                                                                       
+nextgen-chatapp  | ]                                                                                                                                                                                                              
+nextgen-chatapp  | Checking if channel exists...                                                                                                                                                                                  
+nextgen-chatapp  | ✅ Channel created or already exists!
+chat-backend     | 📨 Received message for channel messaging/56974344043: {
+chat-backend     |   id: 'wamid.HBgLNTY5NzQzNDQwNDMVAgASGCA5OEMzMkY1MjdBQkFGNDNCRTY0OEUyNTM0QkVEN0FFMwA=',                                                                                                                        
+chat-backend     |   text: 'pibes',                                                                                                                                                                                               
+chat-backend     |   user_id: '56974344043'
+chat-backend     | }                                                                                                                                                                                                              
+nextgen-chatapp  | ✅ Message sent successfully: {                                                                                                                                                                                
+nextgen-chatapp  |   id: 'wamid.HBgLNTY5NzQzNDQwNDMVAgASGCA5OEMzMkY1MjdBQkFGNDNCRTY0OEUyNTM0QkVEN0FFMwA=',
+nextgen-chatapp  |   text: 'pibes',                                                                                                                                                                                               
+nextgen-chatapp  |   user_id: '56974344043'                                                                                                                                                                                       
+nextgen-chatapp  | }                                                                                                                                                                                                              
+nextgen-chatapp  | Received request: POST application/json                                                                                                                                                                        
+nextgen-chatapp  | Parsed body: {
+nextgen-chatapp  |   chat_name: 'D.Hevia',                                                                                                                                                                                        
+chat-backend     | test_api_key                                                                                                                                                                                                   
+nextgen-chatapp  |   chat_member: '56974344043',                                                                                                                                                                                  
+chat-backend     | eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZXJ2ZXIiOnRydWV9.KE-Y36HY7IpStFo-8E5ea4QmtAmcJ56C5_4upTR7vFA                                                                                                          
+nextgen-chatapp  |   message_id: 'wamid.HBgLNTY5NzQzNDQwNDMVAgASGCA5OEMzMkY1MjdBQkFGNDNCRTY0OEUyNTM0QkVEN0FFMwA=1',                                                                                                               
+nextgen-chatapp  |   user_name: 'NextGenAI',
+nextgen-chatapp  |   user_phone_number: '5491140897287',                                                                                                                                                                          
+nextgen-chatapp  |   message: "It seems like you sent the word 'pibes'. This term is often used in some Spanish-speaking countries, particularly in Argentina, to refer to kids or young people. If you have a specific question or context in which you'd like to discuss 'pibes', feel free to share!",                                                                                                                                                           
+nextgen-chatapp  |   timestamp: '1746742232',
+nextgen-chatapp  |   image_url: '',                                                                                                                                                                                               
+nextgen-chatapp  |   audio_url: ''
+nextgen-chatapp  | }                                                                                                                                                                                                              
+nextgen-chatapp  | Checking if users exist...                                                                                                                                                                                     
+nextgen-chatapp  | ✅ Users ensured in StreamChat: [                                                                                                                                                                              
+nextgen-chatapp  |   { id: '56974344043', name: 'D.Hevia' },
+nextgen-chatapp  |   {                                                                                                                                                                                                            
+nextgen-chatapp  |     id: '5491140897287',                                                                                                                                                                                       
+nextgen-chatapp  |     name: 'NextGen AI',                                                                                                                                                                                        
+nextgen-chatapp  |     image: 'https://hugely-prime-seahorse.ngrok-free.app/profile/agent-profile.svg'
+nextgen-chatapp  |   },                                                                                                                                                                                                           
+nextgen-chatapp  |   { id: 'default-user', name: 'System' }                                                                                                                                                                       
+nextgen-chatapp  | ]                                                                                                                                                                                                              
+nextgen-chatapp  | Checking if channel exists...                                                                                                                                                                                  
+nextgen-chatapp  | ✅ Channel created or already exists!
+chat-backend     | 📨 Received message for channel messaging/56974344043: {
+chat-backend     |   id: 'wamid.HBgLNTY5NzQzNDQwNDMVAgASGCA5OEMzMkY1MjdBQkFGNDNCRTY0OEUyNTM0QkVEN0FFMwA=1',                                                                                                                       
+chat-backend     |   text: "It seems like you sent the word 'pibes'. This term is often used in some Spanish-speaking countries, particularly in Argentina, to refer to kids or young people. If you have a specific question or context in which you'd like to discuss 'pibes', feel free to share!",                                                                                                                                                              
+chat-backend     |   user_id: '5491140897287'
+chat-backend     | }                                                                                                                                                                                                              
+nextgen-chatapp  | ✅ Message sent successfully: {                                                                                                                                                                                
+nextgen-chatapp  |   id: 'wamid.HBgLNTY5NzQzNDQwNDMVAgASGCA5OEMzMkY1MjdBQkFGNDNCRTY0OEUyNTM0QkVEN0FFMwA=1',
+nextgen-chatapp  |   text: "It seems like you sent the word 'pibes'. This term is often used in some Spanish-speaking countries, particularly in Argentina, to refer to kids or young people. If you have a specific question or context in which you'd like to discuss 'pibes', feel free to share!",                                                                                                                                                              
+nextgen-chatapp  |   user_id: '5491140897287'
+nextgen-chatapp  | }         

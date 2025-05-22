@@ -1,0 +1,112 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  binaryTargets = ["native", "debian-openssl-3.0.x"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model chat_api_keys {
+  id          Int     @id @default(autoincrement())
+  api_key     String  @unique
+  api_secret  String  @unique
+  client_name String?
+  created_at  DateTime @default(now())
+
+  @@map("chat_api_keys")
+}
+
+model chat_users {
+  id               String   @id
+  name             String
+  language         String?
+  role             String?
+  teams            Json?
+  created_at       DateTime @default(now())
+  updated_at       DateTime @updatedAt
+  banned           Boolean?
+  online           Boolean?
+  last_active      DateTime?
+  blocked_user_ids Json?
+  shadow_banned    Boolean?
+  invisible        Boolean?
+
+  @@map("chat_users")
+
+  channel_members chat_channel_members[]
+}
+
+model chat_channels {
+  id                String   @id
+  type              String
+  name              String?
+  created_by        Json
+  config            Json
+  member_count      Int
+  cid               String
+  blocked           Boolean
+  disabled          Boolean
+  frozen            Boolean
+  hidden            Boolean
+  last_message_at   DateTime?
+  own_capabilities  Json
+  created_at        DateTime
+  updated_at        DateTime
+
+  @@map("chat_channels")
+
+  channel_members chat_channel_members[]
+}
+
+model chat_channel_members {
+  channel_id String
+  user_id    String
+  status     String
+  created_at DateTime
+  updated_at DateTime
+  banned     Boolean
+  shadow_banned Boolean
+  role       String
+  channel_role String
+  notifications_muted Boolean
+  user       chat_users @relation(fields: [user_id], references: [id])
+  channel    chat_channels @relation(fields: [channel_id], references: [id])
+
+  @@id([channel_id, user_id])
+}
+
+model chat_messages {
+  id                    String    @id
+  text                  String?
+  html                  String?
+  type                  String?
+  user                  Json?     @map("user")
+  attachments           Json?
+  latest_reactions      Json?
+  own_reactions         Json?
+  reaction_counts       Json?
+  reaction_scores       Json?
+  reply_count           Int?
+  deleted_reply_count   Int?
+  cid                   String?
+  created_at            DateTime?
+  updated_at            DateTime?
+  shadowed              Boolean?
+  mentioned_users       Json?
+  silent                Boolean?
+  pinned                Boolean?
+  pinned_at             DateTime?
+  pinned_by             Json?
+  pin_expires           DateTime?
+  restricted_visibility Json?
+
+  @@map("chat_messages")
+}

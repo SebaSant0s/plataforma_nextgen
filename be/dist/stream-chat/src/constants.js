@@ -1,0 +1,6 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.DEFAULT_MESSAGE_SET_PAGINATION = exports.DEFAULT_QUERY_CHANNEL_MESSAGE_LIST_PAGE_SIZE = exports.DEFAULT_QUERY_CHANNELS_MESSAGE_LIST_PAGE_SIZE = void 0;
+exports.DEFAULT_QUERY_CHANNELS_MESSAGE_LIST_PAGE_SIZE = 25;
+exports.DEFAULT_QUERY_CHANNEL_MESSAGE_LIST_PAGE_SIZE = 100;
+exports.DEFAULT_MESSAGE_SET_PAGINATION = { hasNext: false, hasPrev: false };

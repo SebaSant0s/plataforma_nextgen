@@ -1,0 +1,48 @@
+✅ Initialization
+npx prisma init
+
+Creates:
+prisma/schema.prisma file
+.env file for DATABASE_URL
+
+✅ Generate Prisma Client
+npx prisma generate
+Run this every time you change your schema.prisma.
+
+✅ Migrate Database
+1. Create a new migration:
+npx prisma migrate dev --name init
+Applies changes to your local DB and updates Prisma Client.
+
+2. Deploy migrations in production:
+npx prisma migrate deploy
+
+✅ Reset Database
+npx prisma migrate reset
+Drops all data and reapplies all migrations — useful for dev environments.
+
+✅ Introspect Existing Database
+If your DB already exists and you want to generate Prisma models from it:
+
+npx prisma db pull
+
+✅ Studio (GUI for your DB)
+npx prisma studio
+Opens an admin panel in the browser to view/edit data.
+
+✅ Seed the Database
+npx prisma db seed
+Make sure to configure your package.json like:
+
+json
+Copy
+Edit
+"prisma": {
+  "seed": "ts-node prisma/seed.ts"
+}
+
+✅ Format Schema
+npx prisma format
+
+✅ Check Prisma CLI Version
+npx prisma -v
