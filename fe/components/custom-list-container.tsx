@@ -43,44 +43,27 @@ export default function CustomListContainer(
   console.log("Loaded Channels:", loadedChannels);
   
   return (
-    <section>
+    <section style={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
+      {/* Encabezado */}
       <div className='relative hidden flex-col items-start gap-8 p-4 md:flex'>
         <header className='w-full'>
           <div className='flex items-center justify-between'>
             <h1 className='text-2xl font-bold'>Chats</h1>
-
-            {/* <Dialog open={dialogIsOpen} onOpenChange={setDialogIsOpen}>
-              <DialogTrigger>
-                <MessageSquarePlus className='size-6' />
-              </DialogTrigger>
-              <DialogContent>
-                <DialogHeader>
-                  <DialogTitle>Create new channel</DialogTitle>
-                  <DialogDescription>
-                    Start a new conversation with someone
-                  </DialogDescription>
-                </DialogHeader>
-
-                <NewConversationForm onSuccess={closeDialog} />
-              </DialogContent>
-            </Dialog> */}
           </div>
-
           <div className='mt-4'>
             <Input placeholder='Search...' className='bg-muted' />
           </div>
         </header>
       </div>
 
-      <div className='str-chat__channel-list-messenger str-chat__channel-list-messenger-react'>
-        <div
-          className='str-chat__channel-list-messenger__main str-chat__channel-list-messenger-react__main'
-          role='listbox'
-        >
-          {children}
-        </div>
+      {/* Lista de chats */}
+      <div
+        className='str-chat__channel-list-messenger'
+        style={{ flexGrow: 1, overflowY: 'auto', display: 'flex', flexDirection: 'column' }}
+      >
+        <div style={{ flexGrow: 1 }}>{children}</div>
       </div>
     </section>
-  )
+  );
 }
 

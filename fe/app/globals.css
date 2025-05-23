@@ -2,7 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -65,62 +64,98 @@
     --input: 215 27.9% 16.9%;
     --ring: 216 12.2% 83.9%;
   }
-}
 
-.ladle-main {
-  padding: 0 1rem 3rem;
-}
-
-.chat-wrapper {
-  display: flex;
-  flex-direction: row;
-  height: 100%;
-}
-
-.str-chat {
-  height: 100vh;
-}
-.str-chat-channel {
-  flex-grow: 1;
-}
-
-.str-chat-channel-list {
-  overflow: auto;
-}
-
-
-@layer base {
   * {
     @apply border-border;
   }
+
   body {
     @apply bg-background text-foreground;
   }
 }
 
+/* Layout general */
 html,
 body,
-#root {
+#root, .str-chat, .chat-wrapper {
   height: 100%;
 }
+
 body {
+  height:100%;
   margin: 0;
   display: flex;
   overflow: hidden;
 }
-.str-chat__channel-list {
-  width: 30%;
+
+/* Espaciado general */
+.ladle-main {
+  padding: 0 1rem 3rem;
 }
-.str-chat__channel {
+
+/* Chat Layout */
+.chat-wrapper {
+  display: flex;
   width: 100%;
+  height: 100vh;
+  overflow: hidden;
 }
+
+/* Redimensionador entre panel de canales y canal activo */
+.resizer {
+  width: 5px;
+  cursor: col-resize;
+  background-color: rgba(255, 255, 255, 0.1);
+  z-index: 10;
+}
+.resizer:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+/* Panel de canales (lista) */
+.str-chat__channel-list {
+  flex: 0 0 auto;
+  min-width: 200px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.str-chat__channel-list > div {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Canal activo */
+.str-chat__channel {
+  flex-grow: 1;
+  overflow: auto;
+}
+
+/* Thread lateral (opcional) */
 .str-chat__thread {
   width: 45%;
 }
 
+/* Estilo del contenedor principal de chat (sin altura fija) */
+.str-chat {
+  display: flex;
+  height: 100vh;
+  width: 100%;
+}
+
+/* Canal general */
+.str-chat-channel {
+  flex-grow: 1;
+  overflow: auto;
+}
 
 
-.str-chat__message.str-chat__message--me  {
+/* Mensajes propios (alineación y estructura) */
+.str-chat__message.str-chat__message--me {
   grid-template-areas:
     'message avatar'
     'replies replies'
@@ -131,7 +166,8 @@ body {
   column-gap: var(--str-chat__spacing-2);
   grid-template-columns: 1fr auto;
 }
-/* ✅ Ensure the avatar is visible for "me" messages */
+
+/* Mostrar avatar en los mensajes del usuario */
 .str-chat__message.str-chat__message--me > .str-chat__message-sender-avatar {
   display: block !important;
 }
