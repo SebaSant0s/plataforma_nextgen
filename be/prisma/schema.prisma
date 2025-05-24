@@ -107,6 +107,11 @@ model chat_messages {
   pinned_by             Json?
   pin_expires           DateTime?
   restricted_visibility Json?
+  
+  // Nueva relacion de reply
+  reply_to_id           String?
+  reply_to              chat_messages? @relation("ReplyTo", fields: [reply_to_id], references: [id])
+  replies               chat_messages[] @relation("ReplyTo")
 
   @@map("chat_messages")
 }

@@ -142,7 +142,7 @@ const MessageSimpleWithContext = <
 
   const isMyMsg = () => {
     const myUsers = [
-      { id: "5491140897287", name: "NextGen AI" },
+      { id: "15556560742", name: "NextGen AI" },
       ...(publicUser ? [{ id: publicUser.id, name: "App User" }] : [])
     ];
 

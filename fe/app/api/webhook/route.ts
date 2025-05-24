@@ -106,7 +106,7 @@ export async function POST(req: NextRequest) {
     // ✅ List of users that need to exist in StreamChat
     const requiredUsers = [
       { id: chat_member, name: chat_name },
-      { id: "5491140897287", name: "NextGen AI", image: "https://hugely-prime-seahorse.ngrok-free.app/profile/agent-profile.svg" },  // Ensure this user is created
+      { id: "15556560742", name: "NextGen AI", image: "https://hugely-prime-seahorse.ngrok-free.app/profile/agent-profile.svg" },  // Ensure this user is created
       { id: userData.id , name: "Optiland", image: userData.image}
     ];
 
