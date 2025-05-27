@@ -185,7 +185,10 @@ export const MessageInputFlat = <
           <AttachmentSelector />
           <div className='str-chat__message-textarea-container'>
             {displayQuotedMessage && (
-              <QuotedMessagePreview quotedMessage={quotedMessage} />
+              <>
+                {console.log('[REPLY] Mostrando previsualización de mensaje citado:', quotedMessage)}
+                <QuotedMessagePreview quotedMessage={quotedMessage} />
+              </>
             )}
             {isUploadEnabled &&
               !!(numberOfUploads + failedUploadsCount || attachments.length > 0) && (

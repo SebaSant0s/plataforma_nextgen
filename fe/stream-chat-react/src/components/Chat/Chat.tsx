@@ -19,6 +19,64 @@ import type { SupportedTranslations } from '../../i18n/types';
 import type { Streami18n } from '../../i18n/Streami18n';
 import type { DefaultStreamChatGenerics } from '../../types/types';
 
+
+import { useEffect } from 'react';
+import { useChatContext } from '../../context/ChatContext'; // ajusta si tu path es diferente
+import type { Event } from 'stream-chat';
+
+const useLogNewMessages = () => {
+  const { channel } = useChatContext('ChatLogger');
+
+  useEffect(() => {
+    if (!channel) return;
+
+    const handleNewMessage = (event: Event) => {
+      const message = event.message;
+      console.log('[REPLY] Mensaje recibido:', message);
+
+      // Si ya viene completo (ideal)
+      if (message?.quoted_message) {
+        console.log('[REPLY] Este mensaje es una respuesta a:', message.quoted_message);
+      }
+
+      // Fallback: solo viene el ID del mensaje citado
+      if (message?.quoted_message_id && !message.quoted_message) {
+        const quotedFromMessages =
+          channel?.state.messages.find((m) => m.id === message.quoted_message_id);
+
+        const quotedFromThreads = Object.values(channel?.state.threads || {})
+          .flat()
+          .find((m) => m.id === message.quoted_message_id);
+
+        const quoted = quotedFromMessages || quotedFromThreads;
+
+        if (quoted) {
+          message.quoted_message = quoted as unknown as typeof message.quoted_message;
+          console.log('[REPLY] (Fallback) Asociado manualmente el mensaje citado:', quoted);
+        } else {
+          console.warn(
+            '[REPLY] No se encontró mensaje citado con ID:',
+            message.quoted_message_id
+          );
+          console.log('[REPLY] Mensajes disponibles en channel.state.messages:', channel?.state.messages);
+          console.log('[REPLY] Mensajes disponibles en channel.state.threads:', channel?.state.threads);
+        }
+      }
+
+      // Confirmación final
+      if (message?.quoted_message) {
+        console.log('[REPLY] Este mensaje es una respuesta a:', message.quoted_message);
+      }
+    };
+
+    channel.on('message.new', handleNewMessage);
+
+    return () => {
+      channel.off('message.new', handleNewMessage);
+    };
+  }, [channel]);
+};
+
 export type ChatProps<
   StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics,
 > = {
@@ -50,9 +108,7 @@ export type ChatProps<
  * Wrapper component for a StreamChat application. Chat needs to be placed around any other chat components
  * as it provides the ChatContext.
  */
-export const Chat = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics,
->(
+export const Chat = <StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics>(
   props: PropsWithChildren<ChatProps<StreamChatGenerics>>,
 ) => {
   const {
@@ -84,8 +140,7 @@ export const Chat = <
 
   const searchController = useMemo(
     () =>
-      customChannelSearchController ??
-      new SearchController<StreamChatGenerics>({
+      customChannelSearchController ?? new SearchController<StreamChatGenerics>({
         sources: [
           new ChannelSearchSource<StreamChatGenerics>(client),
           new UserSearchSource<StreamChatGenerics>(client),
@@ -112,6 +167,9 @@ export const Chat = <
     theme,
     useImageFlagEmojisOnWindows,
   });
+
+  // 🟢 Aquí va la llamada al hook que escucha nuevos mensajes
+  useLogNewMessages();
 
   if (!translators.t) return null;
 

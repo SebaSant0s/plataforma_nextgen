@@ -64,6 +64,7 @@ const UnMemoizedMessageOptions = <
   const messageActions = getMessageActions();
 
   const handleQuote = () => {
+    console.log('[REPLY] Usuario seleccionó "reply" para el mensaje:', message);
     setQuotedMessage(message);
     const textarea = document.querySelector('.str-chat__textarea__textarea') as HTMLTextAreaElement;
     textarea?.focus();

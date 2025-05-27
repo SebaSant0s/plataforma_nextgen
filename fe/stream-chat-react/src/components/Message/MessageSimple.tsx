@@ -231,6 +231,22 @@ const MessageSimpleWithContext = <
               {hasReactions && <ReactionsList reverse />}
             </div>
             <div className='str-chat__message-bubble'>
+              
+              {message.quoted_message && (
+                <div style={{
+                  borderLeft: '3px solid #ccc',
+                  paddingLeft: '8px',
+                  marginBottom: '6px',
+                  fontSize: '0.875rem',
+                  color: '#666',
+                  background: '#f9f9f9',
+                  borderRadius: '4px'
+                }}>
+                  <div><strong>{message.quoted_message.user?.name || 'Usuario'}</strong></div>
+                  <div>{message.quoted_message.text || '[media]'}</div>
+                </div>
+              )}
+              
               {poll && <Poll poll={poll} />}
               {message.attachments?.length && !message.quoted_message ? (
                 <Attachment

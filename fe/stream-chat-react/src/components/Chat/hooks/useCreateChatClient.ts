@@ -36,6 +36,12 @@ export const useCreateChatClient = <SCG extends ExtendableGenerics = DefaultGene
 
   useEffect(() => {
     const client = new StreamChat<SCG>(apiKey, undefined, cachedOptions);
+
+    (client as any).options = {
+      ...((client as any).options || {}),
+      includeQuotedMessage: true,
+    };
+
     let didUserConnectInterrupt = false;
 
     const connectionPromise = client
