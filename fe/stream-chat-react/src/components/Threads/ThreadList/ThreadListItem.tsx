@@ -1,58 +1,49 @@
-import React, { createContext, useContext } from 'react';
 import axios from 'axios';
+import { useChatContext } from '../../../../../stream-chat-react/src';
+import type { Message, SendMessageOptions } from '../../../../../stream-chat/src/types'
+import type { DefaultStreamChatGenerics } from '../../../../../stream-chat-react/src/types';
+import type { MessageToSend } from '../../../../../stream-chat-react/src';
 
-import type { Thread } from '../../../../../stream-chat/src';
-import { useComponentContext } from '../../../context';
-import { ThreadListItemUI as DefaultThreadListItemUI } from './ThreadListItemUI';
-import type { ThreadListItemUIProps } from './ThreadListItemUI';
 
-import { ChatViewSelector } from '../../ChatView';
-
-import {
-  useChatContext,
-  Chat,
-  Channel,
-  MessageList,
-  MessageInput,
-  ThreadList,
-  View,
-  Views,
-  ThreadProvider,
-} from '../../../../../stream-chat-react/src';
-
-export type ThreadListItemProps = {
-  thread: Thread;
-  threadListItemUIProps?: ThreadListItemUIProps;
-};
-
-const ThreadListItemContext = createContext<Thread | undefined>(undefined);
-export const useThreadListItemContext = () => useContext(ThreadListItemContext);
-
-export const ThreadListItem = ({
-  thread,
-  threadListItemUIProps,
-}: ThreadListItemProps) => {
-  const { ThreadListItemUI = DefaultThreadListItemUI } = useComponentContext();
-  const { channel, client: chatClient } = useChatContext();
+export const useCustomSubmitHandler = () => {
+  const { channel } = useChatContext<DefaultStreamChatGenerics>();
 
   const customSubmitHandler = async (
-    message,
-    channelCid,
-    customMessageData,
-    options
+    message: MessageToSend<DefaultStreamChatGenerics>,
+    channelCid: string,
+    customMessageData?: Partial<Message<DefaultStreamChatGenerics>>,
+    options?: SendMessageOptions
   ) => {
-    const sentMessage = await channel.sendMessage(message, options);
+    if (!channel) {
+      console.error('❌ No hay canal activo para enviar el mensaje.');
+      return;
+    }
+
+    const messageToSend = {
+      ...message,
+      mentioned_users: message.mentioned_users?.map((u) => u.id),
+    };
+
+    const sentMessage = await channel.sendMessage(messageToSend, options);
 
     try {
+
+      const savedMessage = sentMessage.message;
+
+      if (!savedMessage.user) {
+        console.warn("⚠️ El mensaje enviado no tiene información del usuario. Cancelando guardado.");
+        return;
+}
+
       await axios.post('http://localhost:5200/messages', {
-        text: sentMessage.text,
-        html: sentMessage.html,
-        cid: sentMessage.cid,
+        text: savedMessage.text,
+        html: savedMessage.html,
+        cid: savedMessage.cid,
         user: {
-          id: sentMessage.user.id,
-          name: sentMessage.user.name,
+          id: savedMessage.user.id,
+          name: savedMessage.user.name,
         },
-        reply_to_id: sentMessage.parent_id || null,
+        reply_to_id: savedMessage.parent_id || null,
       });
 
       console.log('✅ Mensaje guardado en el backend');
@@ -61,23 +52,5 @@ export const ThreadListItem = ({
     }
   };
 
-  return (
-    <Chat client={chatClient}>
-      <Views>
-        <ChatViewSelector onItemPointerDown={() => {}} />
-        <View.Chat>
-          <Channel channel={channel}>
-            <MessageList />
-            <MessageInput overrideSubmitHandler={customSubmitHandler} />
-          </Channel>
-        </View.Chat>
-        <View.Thread>
-          <ThreadList />
-          <ThreadProvider>
-            <Thread />
-          </ThreadProvider>
-        </View.Thread>
-      </Views>
-    </Chat>
-  );
+  return { customSubmitHandler };
 };
