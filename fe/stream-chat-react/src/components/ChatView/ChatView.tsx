@@ -129,7 +129,7 @@ const selector = ({ unreadThreadCount }: ThreadManagerState) => ({
   unreadThreadCount,
 });
 
-const ChatViewSelector = () => {
+export const ChatViewSelector = () => {
   const { client } = useChatContext();
   const { unreadThreadCount } = useStateStore(client.threads.state, selector);
 

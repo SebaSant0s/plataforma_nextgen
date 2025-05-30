@@ -350,7 +350,7 @@ export class StreamChat<StreamChatGenerics extends ExtendableGenerics = DefaultG
 
     //MODIFY THIS PART OF THE CODE
 
-    this.setBaseURL(this.options.baseURL || 'https://sebasdevchatbackend.nextgenpredictions.com');
+    this.setBaseURL(this.options.baseURL || 'https://chat.stream-io-api.com');
 
     /* if (typeof process !== 'undefined' && 'env' in process && process.env.STREAM_LOCAL_TEST_RUN) {
       this.setBaseURL('http://localhost:4000');
